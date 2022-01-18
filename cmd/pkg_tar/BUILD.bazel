@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_binary(
+    name = "pkg_tar",
+    embed = [":pkg_tar_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "pkg_tar_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/gleyba/pkg_tar_sample/cmd/pkg_tar",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//pkg/tar_helper",
+        "@com_github_jessevdk_go_flags//:go-flags",
+    ],
+)
